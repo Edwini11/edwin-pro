@@ -7,15 +7,16 @@
     body {
       margin: 0;
       padding: 0;
-      background: #000;
+      background: #4b0082; /* Fondo morado intenso */
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       overflow: hidden;
       color: #ffeef8;
+      position: relative;
     }
 
     h1 {
-      color: #ff69b4;
+      color: #ffb6c1;
       font-size: 3em;
       margin-top: 20px;
       text-shadow: 0 0 10px #ff69b4;
@@ -95,6 +96,24 @@
         opacity: 0;
       }
     }
+
+    .tap-heart {
+      position: absolute;
+      font-size: 24px;
+      animation: tap-float 1s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes tap-float {
+      0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2) translateY(-100px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -113,7 +132,6 @@
   <div id="frase">❤️ Cargando frases lindas... ❤️</div>
 
   <script>
-    // Frases románticas que cambian
     const frases = [
       "💖 Linda muchachita, desde que te vi, mi mundo cambió.",
       "😍 Tu sonrisa ilumina mi alma.",
@@ -178,6 +196,20 @@
       palabra.style.fontSize = (14 + Math.random() * 14) + "px";
       document.body.appendChild(palabra);
     }
+
+    // ❤️ Reacción al tap/click con corazones flotantes
+    document.addEventListener("click", function (e) {
+      const heart = document.createElement("div");
+      heart.className = "tap-heart";
+      heart.innerText = "❤️";
+      heart.style.left = e.clientX + "px";
+      heart.style.top = e.clientY + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1000);
+    });
   </script>
 
 </body>
