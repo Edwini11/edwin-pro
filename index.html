@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Linda Muchachita 💖</title>
+  <title>Linda Muchachita 💘</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background: #000;
       font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
       text-align: center;
+      overflow: hidden;
+      color: #ffeef8;
     }
 
     h1 {
@@ -21,7 +22,7 @@
     }
 
     .image-container {
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .image-container img {
@@ -31,17 +32,19 @@
       box-shadow: 0 0 25px #ff1493;
     }
 
-    .lyrics {
-      margin: 30px auto;
-      max-width: 600px;
-      font-size: 1.2em;
-      color: #ffeef8;
+    #frase {
+      font-size: 1.6em;
+      margin: 40px auto;
       padding: 10px;
+      max-width: 80%;
+      min-height: 80px;
+      animation: fade 3s ease-in-out infinite alternate;
     }
 
-    .lyrics span {
-      display: block;
-      margin: 10px 0;
+    @keyframes fade {
+      0% {opacity: 0;}
+      50% {opacity: 1;}
+      100% {opacity: 0;}
     }
 
     .heart {
@@ -50,6 +53,7 @@
       font-size: 20px;
       animation: fall 5s linear infinite;
       top: -10%;
+      z-index: 0;
     }
 
     @keyframes fall {
@@ -77,18 +81,45 @@
     <img src="ella.jpg" alt="Tu foto hermosa">
   </div>
 
-  <div class="lyrics">
-    <span>💖 Linda muchachita, desde que te vi... 💖</span>
-    <span>🥰 No dejo de pensar en ti cada día 🥰</span>
-    <span>❤️ Eres mi sol, mi canción, mi alegría ❤️</span>
-    <span>😍 Con tu sonrisa me cambias la vida 😍</span>
-    <span>💘 Te quiero, te sueño, te pienso, te amo 💘</span>
-    <span>🌹 Eres tan hermosa como una flor 🌹</span>
-    <span>💞 Linda muchachita, mi corazón es tuyo 💞</span>
-  </div>
+  <div id="frase">❤️ Cargando frases lindas... ❤️</div>
 
   <script>
-    // Crear lluvia de corazones
+    const frases = [
+      "💖 Linda muchachita, desde que te vi, mi mundo cambió.",
+      "😍 Tu sonrisa ilumina mi alma.",
+      "❤️ Eres el latido más bonito de mi corazón.",
+      "🥰 Cada día que pasa, te quiero más.",
+      "🌹 Eres más hermosa que mil rosas juntas.",
+      "💘 Tu voz es mi canción favorita.",
+      "💕 Pienso en ti y sonrío como tonto.",
+      "🌟 Eres mi estrella más brillante.",
+      "💌 Tú eres mi sueño hecho realidad.",
+      "✨ Quiero caminar a tu lado por siempre.",
+      "🎶 Tu nombre suena mejor que cualquier melodía.",
+      "💓 Tu mirada me hipnotiza.",
+      "😻 Me encantas, sin razón y con todas las razones.",
+      "🫶 Contigo todo es magia.",
+      "🎇 Si fueras un deseo, no dejaría de pedirte.",
+      "😚 Mi día mejora solo con pensarte.",
+      "🥀 Ni el arte podría describir tu belleza.",
+      "🍫 Eres más dulce que el chocolate.",
+      "🌈 Eres el color que le faltaba a mi vida.",
+      "💫 Me haces sentir mariposas, cada vez.",
+      // Agrega aquí más frases hasta tener 99 o más
+    ];
+
+    let index = 0;
+    const fraseDiv = document.getElementById('frase');
+
+    function cambiarFrase() {
+      fraseDiv.innerHTML = frases[index % frases.length];
+      index++;
+    }
+
+    cambiarFrase(); // Mostrar la primera
+    setInterval(cambiarFrase, 5000); // Cambiar cada 5 segundos
+
+    // Lluvia de corazones
     const heartCount = 40;
     for (let i = 0; i < heartCount; i++) {
       const heart = document.createElement("div");
@@ -102,3 +133,4 @@
 
 </body>
 </html>
+
