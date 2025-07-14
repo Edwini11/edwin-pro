@@ -19,10 +19,17 @@
       font-size: 3em;
       margin-top: 20px;
       text-shadow: 0 0 10px #ff69b4;
+      animation: latido 1.5s infinite;
+    }
+
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .image-container {
       margin-top: 20px;
+      animation: brillar 2s infinite alternate;
     }
 
     .image-container img {
@@ -32,28 +39,50 @@
       box-shadow: 0 0 25px #ff1493;
     }
 
+    @keyframes brillar {
+      0% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
     #frase {
-      font-size: 1.6em;
+      font-size: 1.5em;
       margin: 40px auto;
       padding: 10px;
       max-width: 80%;
       min-height: 80px;
-      animation: fade 3s ease-in-out infinite alternate;
+      font-style: italic;
+      animation: mover 5s ease-in-out infinite alternate, fade 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes mover {
+      0% { transform: translateX(-20px); }
+      100% { transform: translateX(20px); }
     }
 
     @keyframes fade {
-      0% {opacity: 0;}
-      50% {opacity: 1;}
-      100% {opacity: 0;}
+      0% { opacity: 0.2; }
+      50% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+
+    .heart, .palabra {
+      position: fixed;
+      font-size: 20px;
+      animation: fall 7s linear infinite;
+      top: -10%;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .heart {
-      position: fixed;
       color: #ff4d6d;
-      font-size: 20px;
-      animation: fall 5s linear infinite;
-      top: -10%;
-      z-index: 0;
+    }
+
+    .palabra {
+      color: #ffc0cb;
+      font-style: italic;
+      font-weight: bold;
+      opacity: 0.8;
     }
 
     @keyframes fall {
@@ -84,6 +113,7 @@
   <div id="frase">❤️ Cargando frases lindas... ❤️</div>
 
   <script>
+    // Frases románticas que cambian
     const frases = [
       "💖 Linda muchachita, desde que te vi, mi mundo cambió.",
       "😍 Tu sonrisa ilumina mi alma.",
@@ -105,7 +135,7 @@
       "🍫 Eres más dulce que el chocolate.",
       "🌈 Eres el color que le faltaba a mi vida.",
       "💫 Me haces sentir mariposas, cada vez.",
-      // Agrega aquí más frases hasta tener 99 o más
+      "💍 Un día te diré: '¿te casas conmigo?'"
     ];
 
     let index = 0;
@@ -116,11 +146,11 @@
       index++;
     }
 
-    cambiarFrase(); // Mostrar la primera
-    setInterval(cambiarFrase, 5000); // Cambiar cada 5 segundos
+    cambiarFrase();
+    setInterval(cambiarFrase, 5000);
 
-    // Lluvia de corazones
-    const heartCount = 40;
+    // ❤️ Lluvia de corazones
+    const heartCount = 30;
     for (let i = 0; i < heartCount; i++) {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -129,8 +159,26 @@
       heart.innerHTML = "❤️";
       document.body.appendChild(heart);
     }
+
+    // 💬 Lluvia de palabras bonitas
+    const palabras = [
+      "Linda", "Hermosa", "Preciosa", "Amor", "Te quiero", "Bonita", "Bella", "Dulzura",
+      "Cielo", "Princesa", "Sol", "Estrella", "Chiquita", "Corazón", "Chispa", "Sueño",
+      "Encanto", "Mi vida", "Ternura", "Cariño", "Tesoro", "Reina", "Bebé", "Alegría",
+      "Mi luz", "Mi razón", "Mi musa", "Encantadora", "Tierna", "Única", "Sonrisa",
+      "Eterna", "Radiante", "Amada", "Destello", "Angelita", "Flor", "Latido", "Mi todo"
+    ];
+
+    for (let i = 0; i < palabras.length; i++) {
+      const palabra = document.createElement("div");
+      palabra.classList.add("palabra");
+      palabra.textContent = palabras[i];
+      palabra.style.left = Math.random() * 100 + "vw";
+      palabra.style.animationDelay = Math.random() * 10 + "s";
+      palabra.style.fontSize = (14 + Math.random() * 14) + "px";
+      document.body.appendChild(palabra);
+    }
   </script>
 
 </body>
 </html>
-
