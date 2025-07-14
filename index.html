@@ -2,25 +2,49 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Linda Muchachita 💘</title>
+  <title>Sorpresa para ti 💝</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #4b0082; /* Fondo morado intenso */
+      background: #4b0082;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       overflow: hidden;
       color: #ffeef8;
-      position: relative;
     }
 
-    h1 {
-      color: #ffb6c1;
-      font-size: 3em;
-      margin-top: 20px;
-      text-shadow: 0 0 10px #ff69b4;
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .gift-box {
+      width: 150px;
+      height: 150px;
+      background: #ff69b4;
+      border-radius: 10px;
+      margin: auto;
+      margin-top: 20vh;
+      position: relative;
+      cursor: pointer;
       animation: latido 1.5s infinite;
+    }
+
+    .gift-box::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      left: 35px;
+      width: 80px;
+      height: 30px;
+      background: #ff1493;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .gift-box.open {
+      animation: none;
     }
 
     @keyframes latido {
@@ -29,28 +53,27 @@
     }
 
     .image-container {
+      display: none;
+      animation: aparecer 2s ease forwards;
       margin-top: 20px;
-      animation: brillar 2s infinite alternate;
     }
 
     .image-container img {
       width: 250px;
-      height: auto;
       border-radius: 20px;
       box-shadow: 0 0 25px #ff1493;
     }
 
-    @keyframes brillar {
-      0% { opacity: 1; }
-      100% { opacity: 0.6; }
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     #frase {
+      display: none;
       font-size: 1.5em;
-      margin: 40px auto;
+      margin-top: 30px;
       padding: 10px;
-      max-width: 80%;
-      min-height: 80px;
       font-style: italic;
       animation: mover 5s ease-in-out infinite alternate, fade 3s ease-in-out infinite alternate;
     }
@@ -97,120 +120,69 @@
       }
     }
 
-    .tap-heart {
-      position: absolute;
-      font-size: 24px;
-      animation: tap-float 1s ease-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes tap-float {
-      0% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(2) translateY(-100px);
-      }
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <audio autoplay loop>
+  <audio id="musica" loop>
     <source src="linda_muchachita.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio HTML.
   </audio>
 
-  <h1>💘 Linda Muchachita 💘</h1>
+  <div class="container">
+    <div id="gift" class="gift-box" onclick="abrirRegalo()"></div>
 
-  <div class="image-container">
-    <img src="ella.jpg" alt="Tu foto hermosa">
+    <div id="imagen" class="image-container">
+      <img src="ella.jpg" alt="Tu foto hermosa">
+    </div>
+
+    <div id="frase">💖 Linda muchachita, desde que te vi, mi mundo cambió. 💖</div>
   </div>
 
-  <div id="frase">❤️ Cargando frases lindas... ❤️</div>
-
   <script>
-    const frases = [
-      "💖 Linda muchachita, desde que te vi, mi mundo cambió.",
-      "😍 Tu sonrisa ilumina mi alma.",
-      "❤️ Eres el latido más bonito de mi corazón.",
-      "🥰 Cada día que pasa, te quiero más.",
-      "🌹 Eres más hermosa que mil rosas juntas.",
-      "💘 Tu voz es mi canción favorita.",
-      "💕 Pienso en ti y sonrío como tonto.",
-      "🌟 Eres mi estrella más brillante.",
-      "💌 Tú eres mi sueño hecho realidad.",
-      "✨ Quiero caminar a tu lado por siempre.",
-      "🎶 Tu nombre suena mejor que cualquier melodía.",
-      "💓 Tu mirada me hipnotiza.",
-      "😻 Me encantas, sin razón y con todas las razones.",
-      "🫶 Contigo todo es magia.",
-      "🎇 Si fueras un deseo, no dejaría de pedirte.",
-      "😚 Mi día mejora solo con pensarte.",
-      "🥀 Ni el arte podría describir tu belleza.",
-      "🍫 Eres más dulce que el chocolate.",
-      "🌈 Eres el color que le faltaba a mi vida.",
-      "💫 Me haces sentir mariposas, cada vez.",
-      "💍 Un día te diré: '¿te casas conmigo?'"
-    ];
-
-    let index = 0;
-    const fraseDiv = document.getElementById('frase');
-
-    function cambiarFrase() {
-      fraseDiv.innerHTML = frases[index % frases.length];
-      index++;
+    function abrirRegalo() {
+      document.getElementById("gift").classList.add("open");
+      document.getElementById("imagen").style.display = "block";
+      document.getElementById("frase").style.display = "block";
+      document.getElementById("musica").play();
+      crearLluvia();
     }
 
-    cambiarFrase();
-    setInterval(cambiarFrase, 5000);
+    function crearLluvia() {
+      // ❤️ Corazones
+      const heartCount = 30;
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = Math.random() * 5 + "s";
+        heart.innerHTML = "❤️";
+        document.body.appendChild(heart);
+      }
 
-    // ❤️ Lluvia de corazones
-    const heartCount = 30;
-    for (let i = 0; i < heartCount; i++) {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDelay = Math.random() * 5 + "s";
-      heart.innerHTML = "❤️";
-      document.body.appendChild(heart);
+      // 💬 Palabras románticas
+      const palabras = [
+        "Linda", "Hermosa", "Preciosa", "Amor", "Te quiero", "Bonita", "Bella", "Dulzura",
+        "Cielo", "Princesa", "Sol", "Estrella", "Chiquita", "Corazón", "Chispa", "Sueño",
+        "Encanto", "Mi vida", "Ternura", "Cariño", "Tesoro", "Reina", "Bebé", "Alegría",
+        "Mi luz", "Mi razón", "Mi musa", "Encantadora", "Tierna", "Única", "Sonrisa",
+        "Eterna", "Radiante", "Amada", "Destello", "Angelita", "Flor", "Latido", "Mi todo"
+      ];
+
+      for (let i = 0; i < palabras.length; i++) {
+        const palabra = document.createElement("div");
+        palabra.classList.add("palabra");
+        palabra.textContent = palabras[i];
+        palabra.style.left = Math.random() * 100 + "vw";
+        palabra.style.animationDelay = Math.random() * 10 + "s";
+        palabra.style.fontSize = (14 + Math.random() * 14) + "px";
+        document.body.appendChild(palabra);
+      }
     }
-
-    // 💬 Lluvia de palabras bonitas
-    const palabras = [
-      "Linda", "Hermosa", "Preciosa", "Amor", "Te quiero", "Bonita", "Bella", "Dulzura",
-      "Cielo", "Princesa", "Sol", "Estrella", "Chiquita", "Corazón", "Chispa", "Sueño",
-      "Encanto", "Mi vida", "Ternura", "Cariño", "Tesoro", "Reina", "Bebé", "Alegría",
-      "Mi luz", "Mi razón", "Mi musa", "Encantadora", "Tierna", "Única", "Sonrisa",
-      "Eterna", "Radiante", "Amada", "Destello", "Angelita", "Flor", "Latido", "Mi todo"
-    ];
-
-    for (let i = 0; i < palabras.length; i++) {
-      const palabra = document.createElement("div");
-      palabra.classList.add("palabra");
-      palabra.textContent = palabras[i];
-      palabra.style.left = Math.random() * 100 + "vw";
-      palabra.style.animationDelay = Math.random() * 10 + "s";
-      palabra.style.fontSize = (14 + Math.random() * 14) + "px";
-      document.body.appendChild(palabra);
-    }
-
-    // ❤️ Reacción al tap/click con corazones flotantes
-    document.addEventListener("click", function (e) {
-      const heart = document.createElement("div");
-      heart.className = "tap-heart";
-      heart.innerText = "❤️";
-      heart.style.left = e.clientX + "px";
-      heart.style.top = e.clientY + "px";
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 1000);
-    });
   </script>
 
 </body>
 </html>
+
