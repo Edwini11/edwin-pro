@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Linda Muchachita 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff69b4;
+      font-size: 3em;
+      margin-top: 20px;
+      text-shadow: 0 0 10px #ff69b4;
+    }
+
+    .image-container {
+      margin-top: 30px;
+    }
+
+    .image-container img {
+      width: 250px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ff1493;
+    }
+
+    .lyrics {
+      margin: 30px auto;
+      max-width: 600px;
+      font-size: 1.2em;
+      color: #ffeef8;
+      padding: 10px;
+    }
+
+    .lyrics span {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .heart {
+      position: fixed;
+      color: #ff4d6d;
+      font-size: 20px;
+      animation: fall 5s linear infinite;
+      top: -10%;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio autoplay loop>
+    <source src="linda_muchachita.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML.
+  </audio>
+
+  <h1>💘 Linda Muchachita 💘</h1>
+
+  <div class="image-container">
+    <img src="ella.jpg" alt="Tu foto hermosa">
+  </div>
+
+  <div class="lyrics">
+    <span>💖 Linda muchachita, desde que te vi... 💖</span>
+    <span>🥰 No dejo de pensar en ti cada día 🥰</span>
+    <span>❤️ Eres mi sol, mi canción, mi alegría ❤️</span>
+    <span>😍 Con tu sonrisa me cambias la vida 😍</span>
+    <span>💘 Te quiero, te sueño, te pienso, te amo 💘</span>
+    <span>🌹 Eres tan hermosa como una flor 🌹</span>
+    <span>💞 Linda muchachita, mi corazón es tuyo 💞</span>
+  </div>
+
+  <script>
+    // Crear lluvia de corazones
+    const heartCount = 40;
+    for (let i = 0; i < heartCount; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+      heart.innerHTML = "❤️";
+      document.body.appendChild(heart);
+    }
+  </script>
+
+</body>
+</html>
